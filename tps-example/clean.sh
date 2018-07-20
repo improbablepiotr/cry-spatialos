@@ -1,19 +1,16 @@
 #!/usr/bin/env bash
-
 set -e -x
-
 cd "$(dirname "$0")"
+source "common.sh"
 
-WORKER_DIRS=(workers/game-worker)
-BUILD_DIR="$(pwd)"
-DOWNLOAD_DIR="$(pwd)/build/download"
+pushd "${BUILD_DIR}/workers/game-worker"
+    rm -rf improbable
+    rm -rf bin
+popd
 
-for WORKER in "${WORKER_DIRS[@]}"; do
-  pushd "${BUILD_DIR}/${WORKER}"
-  rm -rf improbable
-  rm -rf bin
-  popd
-done
+pushd "${BUILD_DIR}/workers/tps-client"
+    rm -rf "Code/Generated"
+popd
 
 rm -rf "${DOWNLOAD_DIR}"
 rm -rf schema/bin

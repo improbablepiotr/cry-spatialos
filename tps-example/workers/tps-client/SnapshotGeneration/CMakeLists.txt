@@ -7,8 +7,7 @@ get_filename_component(BASE_PATH ${PROJECT_SOURCE_DIR}/../../../ REALPATH)
 
 message(WARNING ${BASE_PATH})
 
-execute_process(COMMAND spatial process_schema generate "--cachePath=${BASE_PATH}/workers/tps-client/.spatialos/schema_codegen_cache_std" "--output=${PROJECT_SOURCE_DIR}/source/Generated/std" --language=cpp --language=cpp "--input=${BASE_PATH}/build/dependencies/schema/standard_library")
-execute_process(COMMAND spatial process_schema generate "--cachePath=${BASE_PATH}/workers/tps-client/.spatialos/schema_codegen_cache_usr" "--output=${PROJECT_SOURCE_DIR}/source/Generated/usr" --language=cpp "--input=${BASE_PATH}/schema" --dependency="${BASE_PATH}/build/dependencies/schema/standard_library")
+execute_process(COMMAND bash ${BASE_PATH}/codegen.sh)
 
 set_property( DIRECTORY PROPERTY VS_STARTUP_PROJECT "snapshotgen" )
 
