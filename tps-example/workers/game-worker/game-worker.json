@@ -1,0 +1,31 @@
+{
+  "workerType": "GameWorker",
+  "attributeSet": {
+    "attributes": [
+      "GameWorker"
+    ]
+  },
+  "entity_interest": {
+    "range_entity_interest": {
+      "radius": 2
+    }
+  },
+  "componentDelivery": {
+    "default": "RELIABLE_ORDERED",
+    "checkout_all_initially": true
+  },
+  "permissions": {
+    "all": {}
+  },
+  "launchConfiguration": {
+    "localDeployment": {
+      "windows": {
+        "localBuildDirectory": "bin/x64/ReleaseWindows",
+        "command": "GameWorker.exe",
+        "arguments": [
+          "${IMPROBABLE_WORKER_ID}"
+        ]
+      }
+    }
+  }
+}

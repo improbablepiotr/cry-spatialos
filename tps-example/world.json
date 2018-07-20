@@ -1,0 +1,19 @@
+{
+  "dimensionsInWorldUnits": {
+    "x": 5000,
+    "z": 5000
+  },
+  "loadBalancing": {
+    "layerConfigurations": [
+      {
+        "layer": "GameWorker",
+        "hexGrid": {
+          "numWorkers": 1
+        }
+      }
+    ]
+  },
+  "snapshot": {
+    "startDeploymentFromSnapshotFile": "./snapshots/default.snapshot"
+  }
+}
