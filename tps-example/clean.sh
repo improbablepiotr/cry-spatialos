@@ -3,14 +3,16 @@ set -e -x
 cd "$(dirname "$0")"
 source "common.sh"
 
-pushd "${BUILD_DIR}/workers/game-worker"
+pushd "${GAME_WORKER_DIR}"
     rm -rf improbable
     rm -rf bin
 popd
 
-pushd "${BUILD_DIR}/workers/tps-client"
+pushd "${TPS_CLIENT_DIR}"
     rm -rf "Code/Generated"
 popd
 
 rm -rf "${DOWNLOAD_DIR}"
 rm -rf schema/bin
+
+echo "Clean completed"

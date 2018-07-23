@@ -15,7 +15,6 @@ retrievePackage() {
   popd
 }
 
-PLATFORM_NAME=$(getPlatformName)
 mkdir -p "${DOWNLOAD_DIR}"
 
 # Get the tools:
