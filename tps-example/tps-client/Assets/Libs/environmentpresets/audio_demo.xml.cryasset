@@ -1,0 +1,8 @@
+<AssetMetadata version="0" type="Xml" guid="2997a8aa-7456-4efb-0257-ae0f93877a58">
+ <Files>
+  <File path="audio_demo.xml"/>
+ </Files>
+ <Details>
+  <Detail name="rootTag">EnvironmentPreset</Detail>
+ </Details>
+</AssetMetadata>

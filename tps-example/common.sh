@@ -5,8 +5,8 @@ cd "$(dirname "$0")"
 DOWNLOAD_DIR="$(pwd)/build/download"
 BUILD_DIR="$(pwd)"
 SDK_VERSION="12.1.0"
-GAME_WORKER_DIR="workers/game-worker"
-TPS_CLIENT_DIR="workers/tps-client"
+GAME_WORKER_DIR="game-worker"
+TPS_CLIENT_DIR="tps-client"
 
 function isLinux() {
   [[ "$(uname -s)" == "Linux" ]]
