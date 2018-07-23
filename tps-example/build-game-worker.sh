@@ -10,7 +10,6 @@ pushd "${GAME_WORKER_DIR}"
 mkdir -p improbable/dependencies/managed
 mkdir -p improbable/dependencies/native
 cp "$DOWNLOAD_DIR"/Improbable.WorkerSdkCsharp.dll improbable/dependencies/managed
-cp "$DOWNLOAD_DIR"/*.dylib improbable/dependencies/native
 cp "$DOWNLOAD_DIR"/*.dll improbable/dependencies/native
 cp "$DOWNLOAD_DIR"/*.so improbable/dependencies/native
 for PLATFORM in "${BUILD_PLATFORMS[@]}"; do

@@ -10,6 +10,7 @@ popd
 
 pushd "${TPS_CLIENT_DIR}"
     rm -rf "Code/Generated"
+    rm -rf "Code/ThirdParty"
 popd
 
 rm -rf "${DOWNLOAD_DIR}"
