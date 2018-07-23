@@ -3,9 +3,9 @@
   "projectName": "cry_spatial",
   "schemaDescriptor": "./schema/bin/schema.descriptor",
   "clientWorkers": [
-    "workers/tps-client/tps-client.json"
+    "tps-client/tps-client.json"
   ],
   "serverWorkers": [
-    "workers/game-worker/game-worker.json"
+    "game-worker/game-worker.json"
   ]
 }
