@@ -3,7 +3,7 @@ set(CRYENGINE_DIR "C:/Program Files (x86)/Crytek/CRYENGINE Launcher/Crytek/CRYEN
 set(TOOLS_CMAKE_DIR "${CRYENGINE_DIR}/Tools/CMake")
 
 set(PROJECT_BUILD 1)
-set(PROJECT_DIR "E:/dev/cry-spatialos/tps-example/workers/tps-client")
+set(PROJECT_DIR "C:/workspace/cry-spatialos/tps-example/tps-client")
 
 include("${TOOLS_CMAKE_DIR}/CommonOptions.cmake")
 
@@ -97,53 +97,48 @@ PRIVATE
 add_library(GameLauncher STATIC "${CRYENGINE_DIR}/Code/CryEngine/CryCommon/CryCore/Platform/platform.h")
 set_target_properties(GameLauncher PROPERTIES LINKER_LANGUAGE CXX)
 if (WIN32)
-    set_visual_studio_debugger_command(GameLauncher "${CRYENGINE_DIR}/bin/win_x64/GameLauncher.exe" "-project \"E:/dev/cry-spatialos/tps-example/workers/tps-client/Game.cryproject\"")
+    set_visual_studio_debugger_command(GameLauncher "${CRYENGINE_DIR}/bin/win_x64/GameLauncher.exe" "-project \"C:/workspace/cry-spatialos/tps-example/tps-client/Game.cryproject\"")
 endif()
 
 add_library(Sandbox STATIC "${CRYENGINE_DIR}/Code/CryEngine/CryCommon/CryCore/Platform/platform.h")
 set_target_properties(Sandbox PROPERTIES LINKER_LANGUAGE CXX)
 if (WIN32)
-    set_visual_studio_debugger_command(Sandbox "${CRYENGINE_DIR}/bin/win_x64/Sandbox.exe" "-project \"E:/dev/cry-spatialos/tps-example/workers/tps-client/Game.cryproject\"")
+    set_visual_studio_debugger_command(Sandbox "${CRYENGINE_DIR}/bin/win_x64/Sandbox.exe" "-project \"C:/workspace/cry-spatialos/tps-example/tps-client/Game.cryproject\"")
 endif()
 
 add_library(GameServer STATIC "${CRYENGINE_DIR}/Code/CryEngine/CryCommon/CryCore/Platform/platform.h")
 set_target_properties(GameServer PROPERTIES LINKER_LANGUAGE CXX)
 if (WIN32)
-    set_visual_studio_debugger_command(GameServer "${CRYENGINE_DIR}/bin/win_x64/Game_Server.exe" "-project \"E:/dev/cry-spatialos/tps-example/workers/tps-client/Game.cryproject\"")
+    set_visual_studio_debugger_command(GameServer "${CRYENGINE_DIR}/bin/win_x64/Game_Server.exe" "-project \"C:/workspace/cry-spatialos/tps-example/tps-client/Game.cryproject\"")
 endif()
 
 set_solution_startup_target(GameLauncher)
 
 if (WIN32)
-    set_visual_studio_debugger_command( ${THIS_PROJECT} "${CRYENGINE_DIR}/bin/win_x64/GameLauncher.exe" "-project \"E:/dev/cry-spatialos/tps-example/workers/tps-client/Game.cryproject\"" )
+    set_visual_studio_debugger_command( ${THIS_PROJECT} "${CRYENGINE_DIR}/bin/win_x64/GameLauncher.exe" "-project \"C:/workspace/cry-spatialos/tps-example/tps-client/Game.cryproject\"" )
 endif()
 
 #BEGIN-CUSTOM
 # Make any custom changes here, modifications outside of the block will be discarded on regeneration.
-get_filename_component(BASE_PATH ${PROJECT_SOURCE_DIR}/../../../../ REALPATH)
+
+# Disable warnings as error, as we're getting C2220 "no 'object' file generated".
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /WX-")
+
+get_filename_component(BASE_PATH ${PROJECT_SOURCE_DIR}/../../../ REALPATH)
 get_filename_component(GEN_CODE_PATH ${PROJECT_SOURCE_DIR}/../Generated/ REALPATH)
 
-add_custom_target(spatial_codegen_std
-				  COMMAND spatial process_schema generate --cachePath="${BASE_PATH}/workers/tps-client/.spatialos/schema_codegen_cache_std" --output="${PROJECT_SOURCE_DIR}/../Generated/std" --language=cpp --input="${BASE_PATH}/build/dependencies/schema/standard_library"
-)
-add_custom_target(spatial_codegen_usr
-					COMMAND spatial process_schema generate --cachePath="${BASE_PATH}/workers/tps-client/.spatialos/schema_codegen_cache_usr" --output="${PROJECT_SOURCE_DIR}/../Generated/usr" --language=cpp --input="${BASE_PATH}/schema" --dependency="${BASE_PATH}/build/dependencies/schema/standard_library"
-)
-
-add_custom_target(spatial_codegen_json
-					COMMAND spatial process_schema generate --cachePath="${BASE_PATH}/workers/tps-client/.spatialos/schema_codegen_cache_json" --output="${PROJECT_SOURCE_DIR}/../Generated/json" --language=ast_json
+add_custom_target(spatial_codegen_all
+				  COMMAND bash ${BASE_PATH}/codegen.sh
 )
 
 add_custom_target(codegen_components
-					COMMAND java -jar ${BASE_PATH}/../tools/ComponentGenerator/output/ComponentGenerator-1.0.jar "${BASE_PATH}/workers/tps-client/Code/Generated/json" "${BASE_PATH}/workers/tps-client/Code/Game/Generated" "${BASE_PATH}/workers/tps-client/guids/"
+					COMMAND java -jar ${BASE_PATH}/../tools/ComponentGenerator/output/ComponentGenerator-1.0.jar "${BASE_PATH}/tps-client/Code/Generated/json" "${BASE_PATH}/tps-client/Code/Game/Generated" "${BASE_PATH}/tps-client/guids/"
 )
 
-# execute_process(COMMAND spatial process_schema generate "--cachePath=${BASE_PATH}/workers/tps-client/.spatialos/schema_codegen_cache_std" "--output=${GEN_CODE_PATH}/std" --language=cpp "--input=${BASE_PATH}/build/dependencies/schema/standard_library")
-# execute_process(COMMAND spatial process_schema generate "--cachePath=${BASE_PATH}/workers/tps-client/.spatialos/schema_codegen_cache_usr" "--output=${GEN_CODE_PATH}/usr" --language=cpp "--input=${BASE_PATH}/schema")
-execute_process(COMMAND java -jar ${BASE_PATH}/../tools/ComponentGenerator/output/ComponentGenerator-1.0.jar "${BASE_PATH}/workers/tps-client/Code/Generated/json" "${BASE_PATH}/workers/tps-client/Code/Game/Generated" "${BASE_PATH}/workers/tps-client/guids/")
+execute_process(COMMAND java -jar ${BASE_PATH}/../tools/ComponentGenerator/output/ComponentGenerator-1.0.jar "${BASE_PATH}/tps-client/Code/Generated/json" "${BASE_PATH}/tps-client/Code/Game/Generated" "${BASE_PATH}/tps-client/guids/")
 add_library(spatial_codegen STATIC "")
 set_target_properties(spatial_codegen PROPERTIES LINKER_LANGUAGE CXX)
-add_dependencies(spatial_codegen spatial_codegen_std spatial_codegen_usr spatial_codegen_json)
+add_dependencies(spatial_codegen spatial_codegen_all)
 add_dependencies(codegen_components spatial_codegen)
 if (CMAKE_CL_64 AND WIN32)
     if(_DEBUG)

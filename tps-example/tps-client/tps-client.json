@@ -1,0 +1,20 @@
+{
+  "workerType": "TPSClient",
+  "attributeSet": {
+    "attributes": [
+      "TPSClient"
+    ]
+  },
+  "entityInterest": {
+    "rangeEntityInterest": {
+      "radius": 100
+    }
+  },
+  "componentDelivery": {
+    "default": "RELIABLE_ORDERED",
+    "checkoutAllInitially": true
+  },
+  "permissions": {
+    "all": {}
+  }
+}

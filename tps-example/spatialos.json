@@ -1,11 +1,11 @@
 {
-  "name": "cry_spatial",
-  "project_version": "0.0.1",
-  "sdk_version": "12.1.0",
-  "dependencies": [
-    {
-      "name": "standard_library",
-      "version": "12.1.0"
-    }
+  "configurationVersion": "0.1",
+  "projectName": "cry_spatial",
+  "schemaDescriptor": "./schema/bin/schema.descriptor",
+  "clientWorkers": [
+    "tps-client/tps-client.json"
+  ],
+  "serverWorkers": [
+    "game-worker/game-worker.json"
   ]
 }

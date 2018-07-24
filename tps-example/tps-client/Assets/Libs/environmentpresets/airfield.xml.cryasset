@@ -1,0 +1,8 @@
+<AssetMetadata version="0" type="Xml" guid="36ca761c-c139-8dde-6c7e-cce8c97f0d69">
+ <Files>
+  <File path="airfield.xml"/>
+ </Files>
+ <Details>
+  <Detail name="rootTag">EnvironmentPreset</Detail>
+ </Details>
+</AssetMetadata>
