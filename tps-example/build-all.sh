@@ -4,6 +4,5 @@ cd "$(dirname "$0")"
 
 ./download-dependencies.sh
 ./codegen.sh
-./build-game-worker.sh
 
 echo "Build all complete"
