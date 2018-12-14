@@ -33,12 +33,12 @@ for more details.
 2. Run `build-all.sh` from the `tps-example` directory. This will:
     1. Download dependencies (download-dependencies.sh).
     2. Generate code from schema (codegen.sh).
-    3. Build the GameWorker (build-game-worker.sh).
 3. Generate the solution for `tps-client` by right-clicking `Game.cryproject`
-4. Build the solution in Visual Studio to provide the `tps-client` worker.
+4. Build `tps-example/tps-client/solutions/Game.sln` solution in Visual Studio to provide the `tps-client` worker.
 (See below section for more information)
-5. Run `spatial local launch` from the `tps-example` directory
-6. Run any number of clients by right-clicking `Game.cryproject` and
+5. Build `tps-example/game-worker/CsharpWorker.sln` solution in Visual Studio to provide the `game-worker` worker.
+6. Run `spatial local launch` from the `tps-example` directory
+7. Run any number of clients by right-clicking `Game.cryproject` and
 selecting `Run Game` (or the exe generated from the `Package Build` option)
 
 ### Building tps-client
